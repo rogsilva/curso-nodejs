@@ -13,7 +13,7 @@ module.exports.listar = function (app, req, res) {
 module.exports.getId = function (app, req, res) {
   var connection = app.config.dbConnection();
   var noticiasModel = new app.app.models.noticiasModel(connection);
-  noticiasModel.getNoticia(function(error, result){
+  noticiasModel.getNoticia(req.query.id, function(error, result){
     res.render('noticias/noticia', {noticia : result});
   });
 }
