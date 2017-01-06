@@ -11,5 +11,10 @@ module.exports.chat = function(application, req, res) {
     return;
   }
 
-  res.render('chat');
+  application.get("io").emit("mensagemParaUsuario",{
+      apelido : dados.apelido,
+      msg : dados.apelido + " acabou de entrar na sala :)"
+  });
+
+  res.render('chat', {usuario : dados});
 }
