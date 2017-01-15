@@ -15,4 +15,12 @@ module.exports.cadastrar = function(application, req, res){
         res.render('cadastro', {erros:erros, dadosForm:dadosForm});
         return;
     }
+
+    var connection = application.config.database;
+    var usuarioModel = new application.app.models.Usuario(connection);
+    var jogoModel = new application.app.models.Jogo(connection);
+
+    usuarioModel.cadastrar(dadosForm);
+    jogoModel.gerarParametros(dadosForm.usuario);
+    res.redirect('/');
 }
